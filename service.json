@@ -1,7 +1,7 @@
 {
     "id": "google-calendar",
     "name": "Google Calendar",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "description": "Puts confirmed Osmium Appointments, Hire and Reservations on a Google Calendar, and moves or removes them when they change or are cancelled. One-way: the site stays the source of truth. Uses a Google service account, so there is no sign-in or token to renew.",
     "category": "business",
     "website": "https://calendar.google.com",
