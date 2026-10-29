@@ -1,0 +1,73 @@
+<div class="d-flex justify-content-between align-items-center py-3 mb-4">
+    <h4 class="mb-0"><i class="bx bx-calendar me-2"></i>Google Calendar Settings</h4>
+    <button type="submit" form="settings-form" class="btn btn-primary">
+        <i class="bx bx-save me-1"></i> Save Settings
+    </button>
+</div>
+
+<?php if ($admin['settingsSaved']): ?>
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        Settings saved successfully!
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+<?php endif; ?>
+
+<?php if ($admin['settingsNote']): ?>
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <?= \htmlspecialchars($admin['settingsNote']) ?>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+<?php endif; ?>
+
+<?php if ($admin['settingsError']): ?>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <?= \htmlspecialchars($admin['settingsError']) ?>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+<?php endif; ?>
+
+<form method="POST" action="<?= $admin['basePath'] ?>settings/google-calendar/" id="settings-form">
+    <input type="hidden" name="token" value="<?= $template['formToken'] ?? '' ?>">
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class="bx bx-calendar me-2"></i>Google Calendar</h5>
+                </div>
+                <div class="card-body">
+                    <p class="text-muted">
+                        Confirmed appointments, hires and reservations are added to one Google Calendar, and moved or
+                        removed when they change or are cancelled. It only sends: changes made in Google Calendar do not
+                        come back to the site.
+                    </p>
+
+                    <div class="mb-3">
+                        <label for="key_json" class="form-label fw-semibold">Service account key (JSON)</label>
+                        <textarea class="form-control font-monospace" id="key_json" name="key_json" rows="5"
+                            autocomplete="off"
+                            placeholder="<?= $admin['calendar']['hasKey'] ? 'Saved - leave blank to keep' : 'Paste the whole downloaded .json file' ?>"></textarea>
+                        <?php if ($admin['calendar']['clientEmail'] !== ''): ?>
+                            <div class="form-text">
+                                Share your calendar with
+                                <strong><?= \htmlspecialchars($admin['calendar']['clientEmail']) ?></strong>
+                                (Make changes to events).
+                            </div>
+                        <?php endif; ?>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="calendar_id" class="form-label fw-semibold">Calendar ID</label>
+                        <input type="text" class="form-control" id="calendar_id" name="calendar_id"
+                            value="<?= \htmlspecialchars($admin['calendar']['calendarId']) ?>"
+                            placeholder="Calendar settings > Integrate calendar > Calendar ID">
+                    </div>
+
+                    <button type="submit" name="action" value="test" class="btn btn-outline-primary">
+                        <i class="bx bx-paper-plane me-1"></i> Send test event
+                    </button>
+                    <div class="form-text">Saves nothing: it uses the key and calendar already saved.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
