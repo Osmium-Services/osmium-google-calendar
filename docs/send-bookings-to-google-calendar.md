@@ -1,6 +1,7 @@
 ---
 title: Show your bookings in Google Calendar
 tags: google calendar, calendar, appointments, hire, reservations, service account, sync
+page: admin/settings/google-calendar
 ---
 
 **Google Calendar** adds confirmed appointments, hires and reservations to one Google Calendar. It moves or removes them if they change or are cancelled.
